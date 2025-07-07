@@ -12,7 +12,7 @@ export async function GET(request: Request) {
     // Tüm kategorileri bul ve parent bilgilerini de "populate" et
     const categories = await Category.find({}).populate('parent');
 
-    return NextResponse.json(categories);
+    return NextResponse.json({ success: true, data: categories });
   } catch (error) {
     console.error("API Error:", error);
     return NextResponse.json({ message: 'Something went wrong!' }, { status: 500 });
@@ -37,7 +37,7 @@ export async function POST(request: Request) {
     const newCategory = await Category.create(body); 
 
     // Başarıyla oluşturulduğuna dair yeni kategoriyi ve 201 kodunu geri döndür.
-    return NextResponse.json(newCategory, { status: 201 }); 
+    return NextResponse.json({ success: true, data: newCategory }, { status: 201 }); 
   } catch (error) {
     console.error("API Error:", error);
     return NextResponse.json({ message: 'Something went wrong!' }, { status: 500 });
